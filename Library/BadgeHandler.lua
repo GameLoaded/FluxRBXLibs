@@ -1,7 +1,7 @@
 --[[
 	BadgeHandler.lua
 	--------------------
-	 Author(s): ThunderGemios10
+	Author(s): ThunderGemios10
 --]]
 
 -- FLUX

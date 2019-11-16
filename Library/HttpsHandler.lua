@@ -1,7 +1,7 @@
 --[[
 	HttpsHandler.lua
 	--------------------
-	 Author(s): AdministratorGnar
+	Author(s): AdministratorGnar
 --]]
 
 -- FLUX
