@@ -26,9 +26,7 @@ local BadgeHandler = {}
 			return BadgeService:UserHasBadgeAsync(player.UserId, badgeId)
 		end)
 		
-		if not success then
-			warn("Error! Could not check if the player has the badge.")
-		end
+		return success, message
 	end
 	
 return BadgeHandler

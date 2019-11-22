@@ -50,6 +50,7 @@ local DatastoreHandler = {Datastore = DataStoreService:GetDataStore("playerData3
 		elseif not data then
 			-- If it was a success but there isn't any data then create the new data.
 			data = {}
+			data.Test = 0
 		end
 		return data
 	end
