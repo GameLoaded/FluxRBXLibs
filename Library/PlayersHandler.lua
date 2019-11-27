@@ -1,5 +1,5 @@
 --[[
-	TeamsHandler.lua
+	PlayerHandler.lua
 	--------------------
 	Author(s): ThunderGemios10
 --]]
@@ -25,21 +25,35 @@ local PlayersHandler = {}
 	function PlayersHandler:GetRankInGroup(player, groupId)
 		assert(player ~= typeof(Instance), "Player is not an instance!")
 		assert(groupId ~= typeof(string), "Group ID is not a string!")
+		
+		local rank = 0
+		
 		local success, message = pcall(function()
-			return player:GetRankInGroup(groupId)
+			rank = player:GetRankInGroup(groupId)
 		end)
 		
-		return success, message
+		if not success then
+			warn(message)
+		end
+		
+		return rank
 	end
 	
 	function PlayersHandler:GetRoleInGroup(player, groupId)
 		assert(player ~= typeof(Instance), "Player is not an instance!")
 		assert(groupId ~= typeof(string), "Group ID is not a string!")
+		
+		local role = ""
+		
 		local success, message = pcall(function()
-			return player:GetRoleInGroup(groupId)
+			role = player:GetRoleInGroup(groupId)
 		end)
 		
-		return success, message
+		if not success then
+			warn(message)
+		end
+		
+		return role
 	end
 	
 -- RETURN
