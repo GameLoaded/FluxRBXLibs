@@ -56,5 +56,18 @@ local PlayersHandler = {}
 		return role
 	end
 	
+	function PlayersHandler:IsInGroup(player, groupId)
+		assert(player ~= typeof(Instance), "Player is not an instance!")
+		assert(groupId ~= typeof(string), "Group ID is not a string!")
+		
+		local isInGroup = false
+		
+		local success, message = pcall(function()
+			isInGroup = player:IsInGroup(groupId)
+		end)
+		
+		return isInGroup
+	end
+	
 -- RETURN
 return PlayersHandler
