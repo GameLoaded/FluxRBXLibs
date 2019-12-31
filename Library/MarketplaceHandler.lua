@@ -1,11 +1,15 @@
 --[[
 	MarketplaceHandler.lua
 	--------------------
-	Author(s): AdministratorGnar
+	 Author(s): AdministratorGnar
 --]]
 
+
 -- FLUX
-local require = shared.import("require")
+local Flux = shared
+local require = Flux.import("require")
+
+-- IMPORT
 
 -- SERVICES
 local Players = game:GetService("Players")
@@ -15,11 +19,11 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local MarketplaceHandler = {MarketData = {}, 
 	checkForPasses = {},
 	developerProducts = {
-			
-		end
+		
 	}}
+	MarketplaceHandler.__index = MarketplaceHandler
 
-	-- BUILT-IN
+	-- LOCAL
 	local function handleGamePassPurchase(player, passId, wasPurchased)
 		if wasPurchased and MarketplaceHandler.MarketData[player] then
 			-- Once a purchase goes through, we add it to the table.
@@ -41,10 +45,10 @@ local MarketplaceHandler = {MarketData = {},
 		end
 	end
 	
-	function MarketplaceService.ProcessReceipt(receiptInfo) 
+	function MarketplaceService:ProcessReceipt(receiptInfo) 
 	 
 		local player = Players:GetPlayerByUserId(receiptInfo.PlayerId)
-		if not player then 
+		if not player then
 			-- If the player left the game then we will mark the product as non-processed.
 			return Enum.ProductPurchaseDecision.NotProcessedYet 
 		end	
@@ -78,7 +82,7 @@ local MarketplaceHandler = {MarketData = {},
 	    return Enum.ProductPurchaseDecision.PurchaseGranted	
 	end
 
-	-- REMOTE
+	-- FUNCTIONS
 	function MarketplaceHandler:Connect(player)
 		forceRecheckPasses(player)
 	end
@@ -91,20 +95,19 @@ local MarketplaceHandler = {MarketData = {},
 	end
 	
 	function MarketplaceHandler:UserOwnsGamePass(player, passId)
-		local foundPass = false
 		if MarketplaceHandler.MarketData[player] then
 			-- Check this players data do see if they own the passId.
 			for _, pass in pairs(MarketplaceHandler.MarketData[player]) do
 				if pass == passId then
-					foundPass = true
-					break
+					return true
 				end
 			end
 		end
-		return foundPass
+		return false
 	end
 	
 	-- CONNECTIONS
 	MarketplaceService.PromptGamePassPurchaseFinished:Connect(handleGamePassPurchase)
 	
+-- RETURN
 return MarketplaceHandler
