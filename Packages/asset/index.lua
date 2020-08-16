@@ -26,10 +26,14 @@ do
 end
 
 -- RETURN
-return function(name)
-	if assets[name] then
-		return assets[name]
+return function(name, parent)
+	if parent then
+		return parent[name]
 	else
-		warn("Attempted to fetch asset ("..name..")")
+		if assets[name] then
+			return assets[name]
+		else
+			warn("Attempted to fetch asset ("..name..")")
+		end
 	end
 end
