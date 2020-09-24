@@ -19,6 +19,8 @@ function HttpHandler.new()
 		--@@ PRIVATE
 		_messagePrefix = "[HttpHandler] ",
 	}, HttpHandler)
+	
+	return self
 end
 
 function HttpHandler:GetAsyncWithPcall(url, nocache, headers)
